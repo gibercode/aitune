@@ -108,8 +108,8 @@ const Home = () => {
       });
       const responses = await Promise.all(promises);
       const songArray = responses.map((response) => response);
-      // const localSongs = deleteDuplicates(songArray);
-      setSongs(songArray);
+      const localSongs = deleteDuplicates(songArray);
+      setSongs(localSongs);
     } catch (error: any) {
       showToast("Something went wrong!");
     } finally {
