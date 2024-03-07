@@ -5,7 +5,7 @@ import { fetchService } from "@/utils";
 import { useUserStore } from "@/store/user";
 import { Card } from "@/components/card";
 import { Loader } from "@/components/loader";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,6 +13,7 @@ import { deleteDuplicates, parseStringToJson } from "@/utils/common";
 import { useSongStore } from "@/store/song";
 import useAuthRedirect from "@/hooks/useGuard";
 import { showToast } from "@/utils/common";
+import { UNAUTHORIZED_CODE } from "@/constants";
 
 const Home = () => {
   useAuthRedirect();
@@ -92,7 +93,7 @@ const Home = () => {
           "api"
         );
 
-        if (error?.response?.status === 401) {
+        if (error?.response?.status === UNAUTHORIZED_CODE) {
           showToast("Unauthorized");
           handleLogout();
           return;
@@ -177,7 +178,12 @@ const Home = () => {
                   No songs here to listen, search something and enjoy the music!
                 </h2>
               )}
-              {loading && <Loader />}
+            </div>
+          )}
+
+          {loading && (
+            <div className="flex justify-center mt-12">
+              <Loader />
             </div>
           )}
 

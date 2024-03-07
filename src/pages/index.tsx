@@ -9,7 +9,7 @@ const SCOPES = process.env.NEXT_PUBLIC_SCOPES;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
 export default function Home() {
-  // useAuthRedirect();
+  useAuthRedirect();
   const handleOauth = () => {
     window.open(
       `https://accounts.spotify.com/authorize?response_type=code&client_id=${CLIENT_ID}&scope=${SCOPES}&redirect_uri=${REDIRECT_URI}`,
